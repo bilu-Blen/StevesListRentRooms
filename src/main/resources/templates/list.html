@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <!--<th>Id</th>-->
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Price</th>
+            <th>Rented</th>
+        </tr>
+
+        <tr th:each="room: ${rooms}">
+            <!--<td th:text="${room.Id}">            </td>-->
+            <td th:text="${room.address}">            </td>
+            <td th:text="${room.city}">            </td>
+            <td th:text="${room.state}">            </td>
+            <td th:text="${room.price}">            </td>
+            <td th:text="${room.rented}">            </td>
+            <td >
+
+                <a th:href="@{/edit/{id}(id=${room.id})}">Update</a>-
+
+                <a th:href="@{/detail/{id}(id=${room.id})}">Details</a>
+            </td>
+
+
+        </tr>
+        <tr><td><a href="/add">Add room</a></td>
+            <td><a href="/register">Sign-up</a></td>
+            <td><a href="/login">Login</a></td>
+        </tr>
+        
+
+    </table>
+
+</body>
+</html>
