@@ -5,11 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.ObjectUtils;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    CloudinaryConfig cloudc;
 
     @Autowired
     RoomRepository roomRepository;
@@ -41,11 +48,22 @@ public class HomeController {
     }
 
     @PostMapping("/process")
-    public String processForm(@Valid @ModelAttribute("room") Room room, BindingResult result){
+    public String processForm(@Valid @ModelAttribute("room") Room room, BindingResult result, @RequestParam("file")MultipartFile file){
         if(result.hasErrors()){
             return "addroom";
         }
-        roomRepository.save(room);
+
+        if(file.isEmpty()){
+            return "addroom";
+        }try{
+            Map uploadResult = cloudc.upload(file.getBytes(), com.cloudinary.utils.ObjectUtils.asMap("resourcetype", "auto"));
+            room.setRoomImage(uploadResult.get("url").toString());
+            roomRepository.save(room);
+
+        }catch (IOException e){
+            e.printStackTrace();
+            return  "addroom";
+        }
         return "redirect:/";
     }
 

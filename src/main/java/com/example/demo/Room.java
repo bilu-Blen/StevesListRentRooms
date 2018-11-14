@@ -22,6 +22,15 @@ public class Room {
     private boolean wifi;
     private String cable;
     private boolean privateBathroom;
+    private String roomImage;
+
+    public String getRoomImage() {
+        return roomImage;
+    }
+
+    public void setRoomImage(String roomImage) {
+        this.roomImage = roomImage;
+    }
 
     public Room() {
     }

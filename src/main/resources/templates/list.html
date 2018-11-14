@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
-<head>
+<html lang="en" xmlns:th="www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5">
+<head th:replace="~{base/base.html::headstuff}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<h1 th:replace="~{base/base.html::heading}"></h1>
+<nav th:replace="~{base/base.html::navfragment}"></nav>
+
     <table>
         <tr>
             <!--<th>Id</th>-->
@@ -22,6 +25,15 @@
             <td th:text="${room.state}">            </td>
             <td th:text="${room.price}">            </td>
             <td th:text="${room.rented}">            </td>
+            <td th:text="${room.description}">      </td>
+            <td th:text="${room.rules}">            </td>
+            <td th:text="${room.wifi}">             </td>
+            <td th:text="${room.cable}"></td>
+            <td th:text="${room.privateBathroom}"></td>
+            <div th:if="${room.roomImage} != null">
+                <img th:src="${room.roomImage}" alt="room image">
+            </div>
+
             <td >
 
                 <a th:href="@{/edit/{id}(id=${room.id})}">Update</a>-
@@ -31,13 +43,16 @@
 
 
         </tr>
-        <tr><td><a href="/add">Add room</a></td>
+        <!--<tr>
+            <td><a href="/add">Add room</a></td>
             <td><a href="/register">Sign-up</a></td>
             <td><a href="/login">Login</a></td>
-        </tr>
+        </tr>-->
         
 
     </table>
+<footer th:replace="~{base/base.html::footerstuff}"></footer>
+<span th:replace="~{base/base.html::scripts}"></span>
 
 </body>
 </html>

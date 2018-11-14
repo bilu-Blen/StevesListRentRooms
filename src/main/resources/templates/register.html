@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org">
-<head>
+<head th:replace="~{base/base.html::headstuff}">
     <meta charset="UTF-8">
     <title>Register</title>
 </head>
 <body>
+<h1 th:replace="~{base/base.html::heading}"></h1>
+
+<nav th:replace="~{base/base.html::navfragment}"></nav>
+
 <h4>New User Registration</h4>
 <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
     First Name <mark><strong>
@@ -31,5 +35,9 @@
 
 
 </form>
+
+<footer th:replace="~{base/base.html::footerstuff}"></footer>
+
+<span th:replace="~{base/base.html::scripts}"></span>
 </body>
 </html>
